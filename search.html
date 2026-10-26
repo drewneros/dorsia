@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dorsiah Search</title>
+<meta name="description" content="Search the Dorsiah caviars and pages.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="bag.css">
+<style>
+.search{display:flex;flex-direction:column;gap:var(--s5);max-width:720px}
+.search input{font:inherit;font-size:var(--t-lead);font-family:var(--display);font-weight:var(--w-display);color:var(--brown);background:transparent;border:0;border-bottom:1px solid var(--stone);padding:8px 0;width:100%;border-radius:0}
+.search input:focus{outline:none;border-bottom-color:var(--gold)}
+.results{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.results a{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s4);padding:var(--s3) 0;border-bottom:1px solid var(--sand);color:var(--brown);text-decoration:none}
+.results b{font-family:var(--display);font-weight:var(--w-display);font-size:var(--t-card)}
+.results span{font-size:var(--t-label);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.none{color:var(--muted);margin:0}
+</style>
+</head>
+<body>
+<div id="site-head"></div>
+<main class="page gutter">
+  <div class="wrap">
+    <div class="page-head">
+      <h1>Search</h1>
+    </div>
+    <div class="search" role="search">
+      <label class="eyebrow" for="q">Caviars and pages</label>
+      <input id="q" type="search" autocomplete="off" placeholder="Beluga, gift, delivery">
+      <ul class="results" id="results" aria-live="polite"></ul>
+      <p class="none" id="none" hidden>Nothing found. Try a caviar name or a page.</p>
+    </div>
+  </div>
+</main>
+<div id="site-foot"></div>
+<script src="shell.js"></script>
+<script src="menu.js"></script>
+<script src="bag.js"></script>
+<script src="data.js"></script>
+<script>
+(function(){
+  // Search: the 4 caviars from data.js plus every page. Plain text match on name and keywords, no server.
+  var items=window.DORSIA_CAVIARS.map(function(c){return {t:c.name,k:'caviar',href:'product.html#'+c.id,w:c.name+' '+c.family+' '+c.species+' caviar tin'}}).concat([
+    {t:'Caviar collection',k:'boutique',href:'shop.html',w:'shop boutique collection all caviars buy'},
+    {t:'The Gift Box',k:'boutique',href:'index.html#gifts',w:'gift box gifts present tasting four tins'},
+    {t:'Dorsiah Lounge',k:'page',href:'index.html#lounge',w:'lounge tasting book story rasht milano'},
+    {t:'Caviar Guide',k:'page',href:'guide.html',w:'guide serve varieties how much storing'},
+    {t:'Delivery and Care',k:'page',href:'delivery.html',w:'delivery shipping chilled courier care storage'},
+    {t:'Contact',k:'page',href:'contact.html',w:'contact host phone whatsapp email'},
+    {t:'Dorsiah Art',k:'page',href:'art.html',w:'art coming soon'},
+    {t:'Become a member',k:'page',href:'member.html',w:'member membership sign up newsletter'},
+    {t:'Legal',k:'page',href:'legal.html',w:'legal terms privacy cookies company'}
+  ]);
+  var q=document.getElementById('q'), ul=document.getElementById('results'), none=document.getElementById('none');
+  function run(){
+    var words=q.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    var hit=words.length?items.filter(function(it){var s=(it.t+' '+it.w).toLowerCase();return words.every(function(w){return s.indexOf(w)>-1})}):items;
+    ul.innerHTML=hit.map(function(it){return '<li><a href="'+it.href+'"><b>'+it.t+'</b><span>'+it.k+'</span></a></li>'}).join('');
+    none.hidden=hit.length>0;
+  }
+  q.addEventListener('input',run);
+  var m=location.search.match(/[?&]q=([^&]*)/); if(m){try{q.value=decodeURIComponent(m[1].replace(/\+/g,' '))}catch(e){}}
+  run(); q.focus({preventScroll:true});
+})();
+</script>
+<script src="motion.js"></script>
+</body>
+</html>

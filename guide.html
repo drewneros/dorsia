@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dorsiah Caviar Guide</title>
+<meta name="description" content="What caviar is, the five varieties in the Dorsiah collection, how to serve it and how to store it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="bag.css">
+<style>
+/* Guide: a reading page. Contents on the left, chapters on the right. */
+.guide{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:start}
+.toc{grid-column:1 / span 3;position:sticky;top:120px;display:flex;flex-direction:column;gap:var(--s2);font-size:var(--t-small)}
+.toc{gap:0;border-left:1px solid var(--stone)}
+.toc a{position:relative;text-decoration:none;color:var(--muted);padding:8px 0 8px 18px;transition:color .3s}
+.toc a::before{content:"";position:absolute;left:-1px;top:8px;bottom:8px;width:2px;background:var(--gold);transform:scaleY(0);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.toc a:hover{color:var(--brown)}
+.toc a.on{color:var(--brown)}
+.toc a.on::before{transform:scaleY(1)}
+.chapters{grid-column:5 / span 8;display:flex;flex-direction:column;gap:var(--s8);min-width:0}
+.chapters section{display:flex;flex-direction:column;gap:var(--s4);scroll-margin-top:120px}
+.kinds{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--s5)}
+.kinds li{display:grid;grid-template-columns:14px minmax(0,1fr);gap:var(--s4);align-items:start}
+.kinds .dot{width:10px;height:10px;border-radius:50%;margin-top:9px;box-shadow:0 0 0 1px rgba(30,28,25,.18)}
+.kinds b{font-family:var(--display);font-weight:var(--w-display);font-size:var(--t-card);display:block;line-height:1.3}
+.kinds p{margin:0;color:var(--muted)}
+.amounts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.amounts div{display:flex;flex-direction:column;gap:var(--s1)}
+.amounts b{font-family:var(--display);font-weight:var(--w-display);font-size:var(--t-lead);font-variant-numeric:tabular-nums}
+.amounts span{font-size:var(--t-small);color:var(--muted)}
+@media (max-width:900px){.toc{display:none}.chapters{grid-column:1 / -1}.amounts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="site-head"></div>
+<main class="page gutter">
+  <div class="wrap">
+    <div class="page-head">
+      <h1>The Caviar Guide</h1>
+      <p>What caviar is, the varieties in the Dorsiah collection, and how to serve and keep it well.</p>
+    </div>
+    <div class="guide">
+      <nav class="toc" aria-label="Guide contents">
+        <a href="#what">What caviar is</a><a href="#varieties">The varieties</a><a href="#serve">How to serve</a><a href="#store">How to store</a>
+      </nav>
+      <div class="chapters">
+        <section id="what">
+          <h2 class="sec">What caviar is</h2>
+          <div class="prose">
+            <p>Caviar is the roe of the sturgeon, lightly salted and packed in tins. Each variety comes from a different sturgeon, and each tastes different: the size of the grain, its colour and its flavour all change from one fish to the next.</p>
+            <p>Dorsiah's caviar is Persian, from Rasht in the province of Gilan, near the southern shore of the Caspian Sea.</p>
+          </div>
+        </section>
+        <section id="varieties">
+          <h2 class="sec">The varieties</h2>
+          <ul class="kinds">
+            <li><span class="dot" style="background:var(--c-beluga-royal)"></span><div><b>Beluga</b><p>From the beluga sturgeon. The largest grain, pale to dark grey, soft and creamy with a long, gentle finish.</p></div></li>
+            <li><span class="dot" style="background:var(--c-oscietra)"></span><div><b>Oscietra</b><p>A medium grain from golden brown to dark, firm, with a rounded, nutty flavour.</p></div></li>
+            <li><span class="dot" style="background:var(--c-sevruga)"></span><div><b>Sevruga</b><p>From the starry sturgeon. A small, dark grey grain with the most intense, briny taste.</p></div></li>
+            <li><span class="dot" style="background:var(--c-baerii)"></span><div><b>Baerii</b><p>From the Siberian sturgeon. A small to medium dark grain, balanced and easy to love, a good first caviar.</p></div></li>
+          </ul>
+          <p class="todo">General notes on each variety. Dorsiah's own tasting notes for each tin come from the client.</p>
+        </section>
+        <section id="serve">
+          <h2 class="sec">How to serve</h2>
+          <div class="prose">
+            <p>Serve it cold, straight from the fridge, and open the tin just before your guests sit down. Use a spoon of mother-of-pearl, horn, bone or glass: silver and steel can leave a metallic taste.</p>
+            <p>The purest way is on its own, from the spoon or the back of the hand. Blinis and a little cr&egrave;me fra&icirc;che are the classic company, with Champagne or ice-cold vodka.</p>
+          </div>
+          <div class="amounts">
+            <div><b>15 to 20 g</b><span>per guest, a taste with drinks</span></div>
+            <div><b>30 g</b><span>per guest, a proper tasting</span></div>
+            <div><b>50 g</b><span>per guest, generous, the centre of the table</span></div>
+          </div>
+        </section>
+        <section id="store">
+          <h2 class="sec">How to store</h2>
+          <div class="prose">
+            <p>Keep the tin closed in the coldest part of the fridge, between 0 and 4 &deg;C, and eat it by the date on the lid. Never freeze it.</p>
+            <p>Once opened, press the lid back on and finish the tin within two days.</p>
+          </div>
+          <p class="todo">General guidance. Check against the supplier's own storage and shelf-life instructions before launch.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+<div id="site-foot"></div>
+<script>
+(function(){
+  // Contents: the chapter you are reading is marked in gold. It follows the scroll, and a click marks it at once.
+  var links=[].slice.call(document.querySelectorAll('.toc a')), secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  function mark(i){links.forEach(function(a,j){a.classList.toggle('on',j===i);if(j===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});}
+  var lock=0;
+  links.forEach(function(a,i){a.addEventListener('click',function(){mark(i);lock=Date.now()+900;})});
+  function spy(){
+    if(Date.now()<lock) return;
+    var line=window.innerHeight*0.35, cur=0;
+    secs.forEach(function(s,i){if(s.getBoundingClientRect().top<=line) cur=i;});
+    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-2) {   // at the very bottom the last chapter is the current one
+      var last=secs.length-1; if(secs[last].getBoundingClientRect().top<window.innerHeight) cur=last;
+    }
+    mark(cur);
+  }
+  var t=false;
+  window.addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(function(){t=false;spy();})}},{passive:true});
+  window.addEventListener('resize',spy);
+  spy();
+})();
+</script>
+<script src="shell.js"></script>
+<script src="menu.js"></script>
+<script src="bag.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

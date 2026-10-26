@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dorsiah Membership</title>
+<meta name="description" content="Become a Dorsiah member: first word on new tins, tastings and the Lounge.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="bag.css">
+<style>
+.member .form{max-width:560px}
+</style>
+</head>
+<body>
+<div id="site-head"></div>
+<main class="page gutter">
+  <div class="wrap">
+    <div class="page-head">
+      <h1>Become a member</h1>
+      <p>First word on new tins, private tastings at the Dorsiah Lounge and seasonal editions. Leave your name and email.</p>
+    </div>
+    <div class="member">
+      <form class="form" id="mform" novalidate>
+        <div class="f"><label for="m-name">Name</label><input id="m-name" name="name" autocomplete="name" required></div>
+        <div class="f"><label for="m-email">Email</label><input id="m-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="send"><button class="btn" type="submit">Become a member</button><p class="msg" id="m-out" aria-live="polite">One email when there is news, nothing more.</p></div>
+      </form>
+    </div>
+    <p class="todo">How sign-ups reach the client (mailing tool or inbox) is decided before launch. This preview sends nothing.</p>
+  </div>
+</main>
+<div id="site-foot"></div>
+<script src="shell.js"></script>
+<script src="menu.js"></script>
+<script src="bag.js"></script>
+<script>
+(function(){
+  // Member sign-up: checks name and email, confirms on the page. Nothing is sent in the preview.
+  var f=document.getElementById('mform'), out=document.getElementById('m-out');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var bad=[].filter.call(f.querySelectorAll('[required]'),function(x){return !x.value.trim()||(x.type==='email'&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(x.value.trim()))});
+    f.querySelectorAll('[aria-invalid]').forEach(function(x){x.removeAttribute('aria-invalid')});
+    if(bad.length){bad.forEach(function(x){x.setAttribute('aria-invalid','true')});out.className='msg';
+      out.textContent='Please add a valid '+bad.map(function(x){return f.querySelector('label[for="'+x.id+'"]').textContent.toLowerCase()}).join(' and ')+'.';bad[0].focus();return;}
+    out.className='msg ok';
+    out.textContent='Welcome, '+f.elements.name.value.trim().split(' ')[0]+'. Preview only: nothing was sent yet. On the live site this adds you to the members list.';
+  });
+})();
+</script>
+<script src="motion.js"></script>
+</body>
+</html>

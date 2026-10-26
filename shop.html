@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dorsiah Shop</title>
+<meta name="description" content="The Dorsiah collection: four Persian caviars from Rasht, and the Gift Box.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="bag.css">
+<style>
+/* Shop: the shared collection cards (tokens.css), plus the Gift Box with its photo */
+.card-art.photo{overflow:hidden;border-radius:var(--r-shell) var(--r-shell) 0 0}
+.card-art.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.card.gift:hover .card-art.photo img{transform:scale(1.05)}
+/* the fifth card sits alone on its row: centred, one card wide (Drew rule: an odd last card goes in the middle) */
+.card.gift{grid-column:1 / -1;justify-self:center;width:calc((100% - 72px) / 4)}
+@media (max-width:900px){.card.gift{width:calc((100% - 12px) / 2)}}
+</style>
+</head>
+<body>
+<div id="site-head"></div>
+<main class="page gutter">
+  <div class="wrap">
+    <div class="page-head">
+      <h1>The collection</h1>
+      <p>Four Persian caviars from Rasht, and the Gift Box. Choose one to see its sizes.</p>
+    </div>
+    <div class="cards" id="grid"></div>
+    <p class="todo">Prices, tasting notes and confirmed species names come from the client before launch.</p>
+  </div>
+</main>
+<div id="site-foot"></div>
+<script src="data.js"></script>
+<script>
+(function(){
+  var g=document.getElementById('grid');
+  g.innerHTML=window.DORSIA_CAVIARS.map(window.dorsiaCard).join('')+'<a class="card gift" href="index.html#gifts"><div class="card-art photo"><img src="media/box-pour-end.jpg" alt="Dorsiah caviar poured from an open jar onto ivory satin" loading="lazy"></div><b class="card-name">The Gift Box</b><span class="card-line">Four caviars, Compact or Extended</span><span class="card-price">4 &times; 10 g or 4 &times; 20 g</span></a>';
+})();
+</script>
+<script src="shell.js"></script>
+<script src="menu.js"></script>
+<script src="bag.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

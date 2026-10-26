@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dorsiah Caviar</title>
+<meta name="description" content="A Dorsiah Persian caviar: sizes, origin, serving and delivery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="bag.css">
+<style>
+/* Product: the lid large on the left, the decision on the right, the rest of the collection below */
+.pd{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:start}
+.pd .art{grid-column:1 / span 6;background:var(--sand);border-radius:var(--r-shell);aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:sticky;top:120px}
+.pd .art svg{width:58%;height:auto;filter:drop-shadow(0 24px 34px rgba(30,28,25,.25))}
+.pd .info{grid-column:8 / span 5;display:flex;flex-direction:column;gap:var(--s5);min-width:0}
+.crumb{font-size:var(--t-label);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.pd h1{font-family:var(--display);font-weight:var(--w-display);font-size:var(--t-page);line-height:1.08;letter-spacing:-.01em;margin:0;display:flex;align-items:center;gap:var(--s4);text-wrap:balance}
+.pd h1 .dot{width:12px;height:12px;border-radius:50%;flex:none;box-shadow:0 0 0 1px rgba(30,28,25,.18)}
+.species{margin:0;color:var(--muted)}
+.note{margin:0}
+.label{font-size:var(--t-label);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.sizes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--s2)}
+.sizes button{font:inherit;font-size:var(--t-label);font-variant-numeric:tabular-nums;padding:12px 0;border:1px solid var(--stone);border-radius:var(--r-inner);background:var(--ivory);color:var(--brown);cursor:pointer}
+.sizes button[aria-pressed="true"]{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+.buy{display:flex;align-items:center;justify-content:space-between;gap:var(--s4)}
+.price{font-size:var(--t-body);font-weight:400}
+.price small{display:block;font-size:var(--t-label);font-weight:300;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.facts{list-style:none;margin:0;padding:var(--s5) 0 0;display:flex;flex-direction:column;gap:var(--s3);border-top:1px solid var(--stone);font-size:var(--t-small)}
+.facts li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:var(--s4)}
+.facts b{font-weight:400;letter-spacing:.12em;text-transform:uppercase;font-size:var(--t-label);color:var(--muted);padding-top:2px}
+.facts a{color:var(--brown);text-underline-offset:3px}
+.more{display:flex;flex-direction:column;gap:var(--s5)}
+.others{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--s4)}
+.others a{display:flex;flex-direction:column;gap:var(--s2);text-decoration:none;color:var(--brown);font-size:var(--t-small)}
+.others .mini{background:var(--sand);border-radius:var(--r-shell);aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+.others .mini svg{width:66%;height:auto;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.others a:hover .mini svg{transform:rotate(-6deg)}
+@media (max-width:900px){
+  .pd .art,.pd .info{grid-column:1 / -1}
+  .pd .art{position:static;aspect-ratio:4/3}
+  .pd .art svg{width:46%}
+  .others{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+</style>
+</head>
+<body>
+<div id="site-head"></div>
+<main class="page gutter">
+  <div class="wrap">
+    <div class="pd">
+      <div class="art" id="art"></div>
+      <div class="info">
+        <a class="crumb" href="shop.html">&larr; The collection</a>
+        <h1><span class="dot" id="dot"></span><span id="name"></span></h1>
+        <p class="species" id="species"></p>
+        <p class="note">Tasting note from the client goes here: grain size, colour, texture and flavour, in two or three sentences.</p>
+        <span class="label">Size</span>
+        <div class="sizes" id="sizes" role="group" aria-label="Tin size"></div>
+        <div class="buy">
+          <span class="price">Price to come<small id="sz">30 g tin</small></span>
+          <button class="btn" type="button" id="add">Add to bag</button>
+        </div>
+        <ul class="facts">
+          <li><b>Origin</b><span>Rasht, Gilan, Iran. Farm and harvest details come from the client.</span></li>
+          <li><b>Larger tins</b><span>500 g and 1 kg through your host. <a href="contact.html">Contact</a></span></li>
+          <li><b>Serving</b><span><a href="guide.html#serve">How to serve and how much per guest</a></span></li>
+          <li><b>Delivery</b><span><a href="delivery.html">Cold delivery, zones and storage</a></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="more">
+      <h2 class="sec">Also in the collection</h2>
+      <div class="others" id="others"></div>
+    </div>
+  </div>
+</main>
+<div id="site-foot"></div>
+<script src="data.js"></script>
+<script>
+(function(){
+  var list=window.DORSIA_CAVIARS, sizes=window.DORSIA_SIZES, size=30, cur;
+  var sz=document.getElementById('sizes');
+  sizes.forEach(function(g){var b=document.createElement('button');b.type='button';b.id='size-'+g;b.textContent=g+' g';b.addEventListener('click',function(){size=g;paint()});sz.appendChild(b)});
+  function find(){var id=decodeURIComponent(location.hash.slice(1));return list.filter(function(c){return c.id===id})[0]||list[0]}
+  function paint(){
+    [].forEach.call(sz.children,function(b){b.setAttribute('aria-pressed',b.id==='size-'+size)});
+    document.getElementById('sz').textContent=size+' g tin';
+  }
+  function show(){
+    cur=find(); size=30;
+    document.title='Dorsiah '+cur.name;
+    document.getElementById('art').innerHTML=window.dorsiaLid(cur.c,cur.name+' lid');
+    document.getElementById('dot').style.background=cur.c;
+    document.getElementById('name').textContent=cur.name;
+    document.getElementById('species').textContent=cur.species;
+    document.getElementById('others').innerHTML=list.filter(function(c){return c!==cur}).map(function(c){
+      return '<a href="#'+c.id+'"><span class="mini">'+window.dorsiaLid(c.c,c.name+' lid')+'</span>'+c.name+'</a>';
+    }).join('');
+    paint();
+  }
+  document.getElementById('add').addEventListener('click',function(){window.DorsiaBag.add({id:cur.id,name:cur.name,c:cur.c,size:size})});
+  window.addEventListener('hashchange',function(){show();window.scrollTo({top:0,behavior:'smooth'})});
+  show();
+})();
+</script>
+<script src="shell.js"></script>
+<script src="menu.js"></script>
+<script src="bag.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dorsiah Delivery and Care</title>
+<meta name="description" content="How Dorsiah caviar reaches you cold, where it ships, the CITES export label, and answers to common questions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="bag.css">
+<style>
+/* Delivery: three plain answers up top, then the questions people ask */
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.three div{display:flex;flex-direction:column;gap:var(--s3)}
+.three p{margin:0;color:var(--muted)}
+.faq{display:flex;flex-direction:column;max-width:780px}
+.faq details{border-bottom:1px solid var(--stone)}
+.faq details:first-child{border-top:1px solid var(--stone)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:var(--s4);padding-block:var(--s4);font-family:var(--display);font-weight:var(--w-display);font-size:var(--t-card)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";width:10px;height:10px;border-right:1.2px solid var(--brown);border-bottom:1.2px solid var(--brown);transform:rotate(45deg) translateY(-3px);transition:transform .3s cubic-bezier(.2,.7,.2,1);flex:none}
+.faq details[open] summary::after{transform:rotate(225deg) translateY(-3px)}
+.faq summary:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.faq .a{padding-bottom:var(--s5);color:var(--muted);max-width:66ch;display:flex;flex-direction:column;gap:var(--s3)}
+.faq .a p{margin:0}
+@media (max-width:900px){.three{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="site-head"></div>
+<main class="page gutter">
+  <div class="wrap">
+    <div class="page-head">
+      <h1>Delivery and care</h1>
+      <p>How your tin reaches you cold, where it travels, and what to do when it arrives.</p>
+    </div>
+    <div class="three">
+      <div><h3 class="sub">Packed cold</h3><p>Each order travels chilled, packed to stay between 0 and 4 &deg;C until it reaches your door.</p></div>
+      <div><h3 class="sub">Where we deliver</h3><p>Milano, the rest of Italy and the European Union. Further afield, ask your host: not every country is possible.</p></div>
+      <div><h3 class="sub">Legal on every tin</h3><p>Sturgeon caviar travels under CITES rules. Every tin sent outside the EU carries a CITES label with the species, origin and lot.</p></div>
+    </div>
+    <p class="todo">Packing, courier, delivery times per zone and the full country list come from the client before launch.</p>
+
+    <h2 class="sec">Questions</h2>
+    <div class="faq">
+      <details><summary>When will my order arrive?</summary><div class="a"><p>Delivery times for Milano, Italy and the EU are confirmed by the client before launch. You will see the delivery window at checkout.</p></div></details>
+      <details><summary>What should I do when it arrives?</summary><div class="a"><p>Put the tin straight into the coldest part of the fridge, between 0 and 4 &deg;C. Keep it closed until just before serving. The <a href="guide.html#store">Caviar Guide</a> has more.</p></div></details>
+      <details><summary>Can I send it as a gift?</summary><div class="a"><p>Yes. Tick "This is a gift" in your bag and add a note, written by hand on a Dorsiah card. The <a href="index.html#gifts">Gift Box</a> is made for giving.</p></div></details>
+      <details><summary>Can I order 500 g or 1 kg?</summary><div class="a"><p>Yes, through your host, who also arranges delivery to a villa, yacht or hotel, and company orders with an invoice. <a href="contact.html">Contact your host</a>.</p></div></details>
+      <details><summary>Is it halal or kosher?</summary><div class="a"><p>Ask your host, who will confirm the certification for your tin before you order.</p></div></details>
+      <details><summary>How can I pay?</summary><div class="a"><p>Payment methods are confirmed with the client's bank before launch.</p></div></details>
+      <details><summary>Can I return caviar?</summary><div class="a"><p>Fresh food cannot be returned once delivered, unless it arrives damaged or not cold. If that happens, contact your host the same day.</p><p class="todo">Final returns policy to be written with the client's lawyer.</p></div></details>
+    </div>
+  </div>
+</main>
+<div id="site-foot"></div>
+<script src="shell.js"></script>
+<script src="menu.js"></script>
+<script src="bag.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

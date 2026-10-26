@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dorsiah Contact</title>
+<meta name="description" content="Contact your Dorsiah host in Milano: orders, private clients, company gifts and tastings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="bag.css">
+<style>
+.contact{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:start}
+.contact .ways{grid-column:1 / span 4;display:flex;flex-direction:column;gap:var(--s5)}
+.contact .ways div{display:flex;flex-direction:column;gap:var(--s2)}
+.contact .ways p{margin:0;color:var(--muted)}
+.contact .form{grid-column:6 / span 7}
+@media (max-width:900px){.contact .ways,.contact .form{grid-column:1 / -1}}
+</style>
+</head>
+<body>
+<div id="site-head"></div>
+<main class="page gutter">
+  <div class="wrap">
+    <div class="page-head">
+      <h1>Speak to your host</h1>
+      <p>Orders, larger tins, company gifts, a tasting at the Dorsiah Lounge. One person in Milano takes care of it.</p>
+    </div>
+    <div class="contact">
+      <div class="ways">
+        <div><h3 class="sub">WhatsApp</h3><p>Number comes from the client before launch.</p></div>
+        <div><h3 class="sub">Email</h3><p>Address comes from the client before launch.</p></div>
+        <div><h3 class="sub">Dorsiah Lounge</h3><p>Milano, by appointment. Address comes from the client.</p></div>
+      </div>
+      <form class="form" id="cform" novalidate>
+        <div class="f"><label for="c-name">Name</label><input id="c-name" autocomplete="name" required></div>
+        <div class="f"><label for="c-contact">Email or WhatsApp</label><input id="c-contact" autocomplete="email" required></div>
+        <div class="f wide"><label for="c-topic">About</label><select id="c-topic"><option>An order</option><option>500 g or 1 kg</option><option>Delivery to a villa, yacht or hotel</option><option>Company gifts</option><option>A tasting at the Dorsiah Lounge</option><option>Something else</option></select></div>
+        <div class="f wide"><label for="c-msg">Message</label><textarea id="c-msg" required></textarea></div>
+        <div class="send"><button class="btn" type="submit">Send to your host</button><p class="msg" id="c-out" aria-live="polite">Your host replies personally.</p></div>
+      </form>
+    </div>
+    <p class="todo">How messages reach the host is decided with the client before launch. This preview sends nothing.</p>
+  </div>
+</main>
+<div id="site-foot"></div>
+<script>
+(function(){
+  var f=document.getElementById('cform'), out=document.getElementById('c-out');
+  // ?topic=tasting (the Lounge "Book a tasting" buttons) preselects the tasting topic
+  if(/[?&]topic=tasting/.test(location.search)){var tp=document.getElementById('c-topic');[].some.call(tp.options,function(o){if(/tasting/i.test(o.text)){o.selected=true;return true}});}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var bad=[].filter.call(f.querySelectorAll('[required]'),function(x){return !x.value.trim()});
+    f.querySelectorAll('[aria-invalid]').forEach(function(x){x.removeAttribute('aria-invalid')});
+    if(bad.length){bad.forEach(function(x){x.setAttribute('aria-invalid','true')});out.className='msg';
+      out.textContent='Please add your '+bad.map(function(x){return f.querySelector('label[for="'+x.id+'"]').textContent.toLowerCase()}).join(', ')+'.';bad[0].focus();return;}
+    out.className='msg ok';
+    out.textContent='Thank you, '+document.getElementById('c-name').value.trim().split(' ')[0]+'. Preview only: nothing was sent yet. On the live site your host replies personally.';
+  });
+})();
+</script>
+<script src="shell.js"></script>
+<script src="menu.js"></script>
+<script src="bag.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

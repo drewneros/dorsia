@@ -1,0 +1,100 @@
+/* Dorsiah design tokens, locked by /taste on 19 Oct 2026. Every component links this file. */
+:root{
+  --ivory:#FAFAF7; --offwhite:#F4F3EF; --bar:#FAFAF7; --white:#F4F3EF; --sand:#EFEEEA; --brown:#1E1C19; --stone:#D6D4CE;
+  --muted:#6F6A62;
+  /* Round 14 C7 (Drew 23 Oct): palette A "Gallery white", near Volzhenka: cool off-white page, soft grey cards, near-black text, gold only on the lid and fine details */
+  /* Drew 21 Oct: about 20% white (--white), the rest palette, Deep Brown only for text and buttons, never a section background. --bar is the nav colour */
+  --gold:#8A6828;
+  --display:"Kanit","Helvetica Neue",Arial,sans-serif;
+  --w-display:200; /* Kanit Extra Light for headings and the wordmark (Drew 23 Oct). Font swap = change --display, --body and this. */
+  --body:"Kanit","Helvetica Neue",Arial,sans-serif;
+  --r-shell:10px; --r-inner:5px;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:72px; --s9:112px;
+  --max:1200px;
+  /* type scale (brand pass 19 Oct): 7 sizes only. The wordmark DORSIAH lives in the menu, on the lid and in the footer, never as a headline */
+  --t-label:12px; --t-small:14px; --t-body:17px; --t-card:22px; --t-lead:28px;
+  --t-section:clamp(30px,4vw,44px); --t-page:clamp(40px,6vw,64px);
+  /* collection identifiers, client deck slide 4: dots and lid bands only */
+  --c-beluga-royal:#B99545; --c-sevruga:#9DA3A8; --c-oscietra:#292722; --c-baerii:#286A8A;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ivory);color:var(--brown);font-family:var(--body);font-weight:300;font-size:var(--t-body);line-height:1.65}
+.gutter{padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:var(--t-label);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:400}
+.btn{display:inline-flex;align-items:center;justify-content:center;font:inherit;font-size:var(--t-label);font-weight:400;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;
+  padding:14px 24px;border-radius:var(--r-inner);border:1px solid var(--brown);background:var(--brown);color:var(--ivory);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.btn:hover{background:#0F0E0C;border-color:#0F0E0C}
+.btn:active{transform:scale(.97);transition:transform 100ms ease-out}
+.btn.secondary{background:transparent;color:var(--brown);border-color:var(--stone)}
+.btn.secondary:hover{border-color:var(--brown);background:color-mix(in srgb,var(--brown) 4%,transparent)}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---- Shared across every page (home included) ---- */
+/* Nav bar: warm off-white from the palette (Drew 20 Oct night), fading out at the bottom */
+/* Drew 24 Oct: the bar at 70%, and the fade starts near the middle and eases out to clear, no band (the blur behind fades the same way) */
+.sitebar{background:linear-gradient(to bottom,color-mix(in srgb,var(--bar) 70%,transparent) 0%,color-mix(in srgb,var(--bar) 70%,transparent) 45%,color-mix(in srgb,var(--bar) 59%,transparent) 56%,color-mix(in srgb,var(--bar) 45%,transparent) 66%,color-mix(in srgb,var(--bar) 30%,transparent) 76%,color-mix(in srgb,var(--bar) 16%,transparent) 86%,color-mix(in srgb,var(--bar) 6%,transparent) 94%,color-mix(in srgb,var(--bar) 0%,transparent) 100%)!important}
+@media (prefers-reduced-transparency:reduce){.sitebar{background:var(--bar)!important}}
+
+/* Footer: sand, fading in from the ivory page above (Drew 21 Oct: no brown section backgrounds) */
+.foot{background:linear-gradient(in oklab to bottom,var(--ivory) 0,var(--sand) 160px)!important;padding-top:160px!important}
+
+/* Delivery strip: one quiet line above the menu, every page */
+.strip{margin:0;padding-top:10px;text-align:center;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.strip + .sitebar-in .nav{padding-top:14px}
+
+/* Motion (motion.js): things rise into place as they reach the screen, pictures unveil. Nothing is hidden unless motion.js runs and motion is allowed. */
+/* opacity only on body: a transform there would trap the fixed menu bar and the bag drawer inside the page */
+html.mo body{animation:page-in .7s ease-out}
+@keyframes page-in{from{opacity:0}}
+html.mo main{animation:page-rise .9s cubic-bezier(.2,.7,.2,1)}
+@keyframes page-rise{from{transform:translateY(14px)}}
+html.mo.leaving body{opacity:0;transition:opacity .22s ease-in}
+html.mo [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1) var(--rd,0s),transform 1.1s cubic-bezier(.2,.7,.2,1) var(--rd,0s)}
+html.mo [data-reveal].in{opacity:1;transform:none}
+html.mo [data-reveal] img,html.mo img[data-reveal]{clip-path:inset(16% 0 0 0);transform:scale(1.08);transition:opacity .9s ease var(--rd,0s),clip-path 1.3s cubic-bezier(.2,.7,.2,1) var(--rd,0s),transform 1.8s cubic-bezier(.2,.7,.2,1) var(--rd,0s)}
+html.mo [data-reveal].in img,html.mo img[data-reveal].in{clip-path:inset(0 0 0 0);transform:none}
+/* pictures lift a little under the pointer */
+figure img{transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+@media (hover:hover){figure:hover img,html.mo figure[data-reveal].in:hover img{transform:scale(1.03)}}
+
+/* Menu (menu.js, round 14): Saray's 2-line hamburger, every width. Panel drops under the bar on the left. */
+.menu-li{display:list-item}
+.menu-toggle{display:flex;flex-direction:column;justify-content:center;gap:5px;width:22px;height:16px;padding:0;border:0;background:none;cursor:pointer;color:inherit}
+.menu-toggle span{display:block;width:100%;height:1.5px;background:currentColor;transition:transform .25s,opacity .25s}
+.menu-open .menu-toggle span:nth-child(1){transform:translateY(3.25px) rotate(45deg)}
+.menu-open .menu-toggle span:nth-child(2){transform:translateY(-3.25px) rotate(-45deg)}
+.menu-toggle:focus-visible,.menu-sub:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.menu-panel{position:absolute;left:0;right:0;top:calc(100% - 24px);display:flex;flex-direction:column;align-items:flex-start;padding:8px max(22px,calc((100% - var(--max)) / 2)) 28px;background:var(--bar);box-shadow:0 24px 40px -28px rgba(30,28,25,.4)}
+.menu-panel[hidden],.menu-boutique[hidden]{display:none}
+.menu-panel a,.menu-sub{all:unset;cursor:pointer;font-family:var(--display);font-weight:var(--w-display);font-size:var(--t-card);line-height:1.2;padding:12px 0;color:var(--brown)}
+.menu-sub::after{content:" +";color:var(--muted)}
+.menu-sub[aria-expanded="true"]::after{content:" \2212"}
+.menu-boutique{display:flex;flex-direction:column;padding-left:18px;border-left:1px solid var(--stone)}
+.menu-boutique a{font-size:var(--t-body);padding:8px 0}
+.menu-panel a[aria-current="page"]{color:var(--gold)}
+.menu-panel .menu-lang{font-family:var(--body);font-size:var(--t-label);letter-spacing:.2em;padding-top:20px;color:var(--muted)}
+@media (min-width:901px){.menu-panel .menu-lang{display:none}}
+
+/* Hero buttons: one width */
+.hero .ctas .btn{min-width:228px}
+@media (max-width:900px){.hero .ctas{flex-direction:column;align-items:stretch}.hero .ctas .btn{min-width:0}}
+
+/* Collection cards (round 14 C8, Volzhenka style). data.js dorsiaCard builds them; home #collection and shop use the same grid. */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:0 0 var(--s5);background:var(--sand);border-radius:var(--r-shell);color:var(--brown);text-decoration:none;min-width:0;transition:background .35s cubic-bezier(.2,.7,.2,1)}
+.card-art{width:100%;aspect-ratio:6 / 5;display:flex;align-items:center;justify-content:center;margin-bottom:var(--s2)}
+.card-art svg{width:58%;height:auto;filter:drop-shadow(0 12px 18px rgba(30,28,25,.2));transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.card-name{font-family:var(--display);font-weight:var(--w-display);font-size:var(--t-card);line-height:1.25;padding-inline:var(--s3)}
+.card-line{font-size:var(--t-small);color:var(--muted);padding-inline:var(--s3)}
+.card-price{font-size:var(--t-label);letter-spacing:.16em;text-transform:uppercase;padding-top:var(--s2)}
+@media (hover:hover){.card:hover{background:var(--stone)}.card:hover .card-art svg{transform:translateY(-4px) rotate(-4deg)}}
+.card:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media (max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card-name{font-size:18px}}
+
+/* C15 phone QA (23 Oct): every tap target on a touch screen is at least 44 px tall. Small pills and inline links grow their hit area, not their look. */
+@media (pointer:coarse){
+  .editions button,.tabs button,.grain .gtabs button{min-height:44px}
+  .crumb,.facts span a{display:inline-flex;align-items:center;min-height:44px}
+}
