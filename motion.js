@@ -32,7 +32,7 @@
     if (!e.persisted && !location.hash && !moved) window.scrollTo(0, 0);
   });
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  d.classList.add('mo');
+  d.classList.add('mo-init', 'mo');   // mo-init: blocks start hidden with no transition, so nothing flashes then fades out on a fast load (26 Oct)
 
   // Leave with a short fade when the link goes to another page of the site.
   document.addEventListener('click', function (e) {
@@ -61,6 +61,8 @@
   });
   // blocks that slide in from the side (home Lounge) use the same observer; their CSS keys on [data-slide]
   [].forEach.call(document.querySelectorAll('[data-slide]'), function (el) { seen.push(el); });
+  void d.offsetHeight;                                   // apply the hidden state at once
+  requestAnimationFrame(function () { requestAnimationFrame(function () { d.classList.remove('mo-init'); }); });
   // a short stagger between neighbours that arrive together
   seen.forEach(function (el) {
     var i = 0, p = el.previousElementSibling;
