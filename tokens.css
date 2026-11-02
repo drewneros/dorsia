@@ -71,7 +71,16 @@ figure img{transition:transform .9s cubic-bezier(.2,.7,.2,1)}
 .menu-open .menu-toggle span:nth-child(1){transform:translateY(3.25px) rotate(45deg)}
 .menu-open .menu-toggle span:nth-child(2){transform:translateY(-3.25px) rotate(-45deg)}
 .menu-toggle:focus-visible,.menu-sub:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.menu-panel{position:absolute;left:0;right:0;top:calc(100% - 24px);display:flex;flex-direction:column;align-items:flex-start;padding:8px max(22px,calc((100% - var(--max)) / 2)) 28px;background:var(--bar);box-shadow:0 24px 40px -28px rgba(30,28,25,.4)}
+/* Drew 2 Nov: the open menu is the bar growing downward. The panel stays out of the page flow (no layout jump on sticky pages) and carries the bar's own surface: 70% ivory + 14px blur, held down through the last item, then the same eased fade to clear over --bar-fade at the very bottom. The bar's own surface is switched off while open so the two never stack. The surface starts 300px above the panel so it covers the bar row, off-screen overflow is invisible */
+.menu-panel{--bar-fade:72px;position:absolute;left:0;right:0;top:calc(100% - 24px);display:flex;flex-direction:column;align-items:flex-start;padding:8px max(22px,calc((100% - var(--max)) / 2)) var(--bar-fade)}
+.sitebar.menu-open{background:none!important}
+.sitebar.menu-open::before{display:none}
+.menu-panel::before,.menu-panel::after{content:"";position:absolute;z-index:-1;left:0;right:0;top:-300px;bottom:0;pointer-events:none}
+.menu-panel::before{background:linear-gradient(to bottom,color-mix(in srgb,var(--bar) 70%,transparent) 0%,color-mix(in srgb,var(--bar) 70%,transparent) calc(100% - var(--bar-fade)),color-mix(in srgb,var(--bar) 59%,transparent) calc(100% - var(--bar-fade) * .8),color-mix(in srgb,var(--bar) 45%,transparent) calc(100% - var(--bar-fade) * .62),color-mix(in srgb,var(--bar) 30%,transparent) calc(100% - var(--bar-fade) * .44),color-mix(in srgb,var(--bar) 16%,transparent) calc(100% - var(--bar-fade) * .26),color-mix(in srgb,var(--bar) 6%,transparent) calc(100% - var(--bar-fade) * .11),color-mix(in srgb,var(--bar) 0%,transparent) 100%)}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .menu-panel::after{backdrop-filter:blur(14px) saturate(1.1);-webkit-backdrop-filter:blur(14px) saturate(1.1);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 calc(100% - var(--bar-fade)),rgba(0,0,0,.84) calc(100% - var(--bar-fade) * .8),rgba(0,0,0,.64) calc(100% - var(--bar-fade) * .62),rgba(0,0,0,.43) calc(100% - var(--bar-fade) * .44),rgba(0,0,0,.23) calc(100% - var(--bar-fade) * .26),rgba(0,0,0,.08) calc(100% - var(--bar-fade) * .11),transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 calc(100% - var(--bar-fade)),rgba(0,0,0,.84) calc(100% - var(--bar-fade) * .8),rgba(0,0,0,.64) calc(100% - var(--bar-fade) * .62),rgba(0,0,0,.43) calc(100% - var(--bar-fade) * .44),rgba(0,0,0,.23) calc(100% - var(--bar-fade) * .26),rgba(0,0,0,.08) calc(100% - var(--bar-fade) * .11),transparent 100%)}
+}
+@media (prefers-reduced-transparency:reduce){.menu-panel::before{background:var(--bar)}.menu-panel::after{display:none}}
 .menu-panel[hidden],.menu-boutique[hidden]{display:none}
 .menu-panel a,.menu-sub{all:unset;cursor:pointer;font-family:var(--display);font-weight:var(--w-display);font-size:var(--t-card);line-height:1.2;padding:12px 0;color:var(--brown)}
 .menu-sub::after{content:" +";color:var(--muted)}
